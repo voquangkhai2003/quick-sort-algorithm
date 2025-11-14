@@ -19,6 +19,9 @@ namespace ConsoleApp10
 
         static int Partition(Array arr, int low, int high)
         {
+            int mid = low + (high - low) / 2;
+            Swap(arr, mid, high);
+
             int pivot = (int)arr.GetValue(high);
             int i = low - 1;
 
@@ -47,11 +50,11 @@ namespace ConsoleApp10
         static void Main(string[] args)
         {
             var rand = new Random();
-            int n = 7000;
-            int loop = 5;
+            int n = 100000;
+            int loop = 10;
             Array aRandom = Array.CreateInstance(typeof(int), n);
             for (int i = 0; i < n; i++)
-                aRandom.SetValue(rand.Next(0, 99999), i);
+                aRandom.SetValue(rand.Next(0, 999999), i);
             Array aAsc = (Array)aRandom.Clone();
             QuickSort(aAsc, 0, aAsc.Length - 1);
             Array aDesc = Array.CreateInstance(typeof(int), n);
@@ -126,9 +129,6 @@ namespace ConsoleApp10
             Console.WriteLine("Tệ nhất: " + te + " ms");
             Console.WriteLine("Trung bình: " + (tong / loop) + " ms");
             Console.WriteLine();
-
-            for (int i = 0; i < b.Length; i++)
-                Console.Write((int)b.GetValue(i) + (i + 1 < b.Length ? " " : "\n"));
         }
     }
 }
